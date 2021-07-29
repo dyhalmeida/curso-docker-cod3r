@@ -1,5 +1,5 @@
 1. Cria serviço de DB
-2. Comandos: 
+1.1. Comandos: 
 
 Roda o compose em background
 - docker-compose up -d
@@ -8,3 +8,6 @@ Executa um comando para listar os banco de dados no container db.
 Utiliza usuário postgres.
 - docker-comspose exec db psql -U postgres -c '\l'
 
+2. Mapear volumes e scripts sql
+- Executa um arquivo sql no POSTGRES
+docker-compose exec db psql -U postgres -f /scripts/check.sql
