@@ -51,11 +51,11 @@ services:
     networks:
       - fila
   worker:
-    image: python:3.6
+    build: worker # Busca dentro da pasta worker o Dockerfile
     volumes:
       - ./worker:/worker
     working_dir: /worker
-    command: bash ./app.sh
+    command: worker.py # comando passado para entrypoint do Dockerfile
     networks:
       - fila
     depends_on:

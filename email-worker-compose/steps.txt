@@ -11,3 +11,7 @@ Utiliza usuário postgres.
 2. Mapear volumes e scripts sql
 - Executa um arquivo sql no POSTGRES
 docker-compose exec db psql -U postgres -f /scripts/check.sql
+
+
+Escala o container worker em três instâncias
+🚀 docker-compose up -d --scale worker=3       
