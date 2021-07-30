@@ -1,6 +1,9 @@
 version: '3'
 volumes:
   dados:
+networks:
+  banco:
+  web:
 services:
   db:
     image: postgres:9.6
@@ -12,6 +15,8 @@ services:
       # Scripts
       - ./scripts:/scripts
       - ./scripts/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - banco
   frontend:
     image: nginx:1.13
     volumes:
@@ -22,6 +27,10 @@ services:
     ports:
       # host:container
       - 80:80
+    networks:
+      - web
+    depends_on:
+      - app
   app:
     image: python:3.6
     volumes:
@@ -29,3 +38,8 @@ services:
       - ./app:/app
     working_dir: /app # Dentro do container
     command: bash ./app.sh
+    networks:
+      - web
+      - banco
+    depends_on:
+      - db
